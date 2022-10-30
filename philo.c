@@ -21,7 +21,6 @@ int main(int ac, char **av)
 
 	if (ac == 5 || ac == 6)
 	{
-		philo = malloc(sizeof(t_philo));
 		ph_utils = malloc(sizeof(t_ph_utils));
 		philo = malloc(sizeof(t_philo) * ph_utils->n_philo);
 		error_checks(ac, av, ph_utils);
@@ -33,7 +32,7 @@ int main(int ac, char **av)
 				return (0);
 		}
 	}
-	return(printf("Invalid args"));
+	return(printf("Invalid number of args"));
 }
 
 

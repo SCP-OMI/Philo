@@ -52,7 +52,7 @@ void 	mini_print(t_philo *philo, char *str, long time);
 
 
 //Routine functions
-void 	*routine(void *arg);
+void 	*routine(void *philo);
 void	routine_eating(t_philo *philo);
 void	routine_sleeping(t_philo *philo);
 void	routine_thinking(t_philo *philo);
