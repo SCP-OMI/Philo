@@ -10,16 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"philosopher.h"
+#include "philosopher.h"
 
-int main (int ac, char **av)
+int main(int ac, char **av)
 {
-	(void) ac;
-	t_philo inits;
-	//t_p_utils utils;
-	error_checks(ac, av);
-	param_init(&inits, av);
-	thread_create(&inits);
-	return(0);
+
+	t_philo *philo;
+	t_ph_utils *ph_utils;
+
+
+	if (ac == 5 || ac == 6)
+	{
+		philo = malloc(sizeof(t_philo));
+		error_checks(ac, av, &ph_utils);
+		ph_utils = malloc(sizeof(t_ph_utils));
+		philo = malloc(sizeof(t_philo) * ph_utils->n_philo);
+		param_init(&philo, &ph_utils, ac, av);
+		thread_create(philo);
+		while(1)
+		{
+			if (routine(philo))
+				return (0);
+		}
+	}
+	return(printf("Invalid args"));
 }
+
+
+
+
 

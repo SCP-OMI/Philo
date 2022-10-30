@@ -9,7 +9,7 @@ all:	$(NAME)
 
 
 %.o:	%.c
-		@$(CC) -Wall -Wextra -Werror -Imlx -c $<
+		@$(CC) -c $<
 
 $(NAME): $(OBJS)
 		@$(CC) $(OBJS) -o $(NAME)
