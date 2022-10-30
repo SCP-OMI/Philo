@@ -42,11 +42,11 @@ void	prompt_death(t_philo *philo)
 	printf("%ld : philo %d died\n", get_time(philo->start), philo->philo_id);
 }
 
-void *routine(void *philo)
+void *routine(void *arg)
 {
 	t_philo *philo;
 
-	philo = (t_philo *)philo;
+	philo = (t_philo *)arg;
 	while (1)
 	{
 		routine_eating(philo);

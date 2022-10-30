@@ -13,24 +13,28 @@
 #include"philosopher.h"
 
 
-void exits()
+int exits()
 {
-	write(1, "exit\n", 6);
-	exit(0);
+	write(2, "Error : not enough args\n", 6);
+	return(1);
 }
 
-int error_checks(int ac, char **av, t_ph_utils *utils)
+
+void error_checks(int ac, char **av, t_ph_utils *utils)
 {
-	
-	if (ac != 5)
-		exits();
-	while(ac != 1)
+	int i;
+
+	i = 1;
+	while (av[i])
 	{
-		if (ft_atoi(av[utils->i]))
-			return(write(1, "ok\n", 3));	
+		if (ft_atoi(av[i]) == 0)
+			exits();
+		if (av[i][0] == '\0')
+			exits();
+		if (av[i][0] == '-')
+			exits();
+		i++;
 	}
-	return (0);
-	
 }
 
 int thread_create(t_philo *philo)
@@ -85,9 +89,9 @@ void init_parse(int ac, char **av, t_ph_utils *utils, t_philo *philo)
 	utils->time_to_eat = atoi(av[3]);
 	utils->time_to_sleep = atoi(av[4]);
 	if (ac == 6)
-		philo->loop - atoi(av[5]);
+		philo->loop = atoi(av[5]);
 	else
-		philo->loop = 0;
+		philo->loop = -1;
 	philo->start = get_time(0);
 	pthread_mutex_init(&utils->mutex_msg, NULL);
 	utils->mutex = malloc(sizeof(pthread_mutex_t) * utils->n_philo);	
@@ -131,4 +135,12 @@ int monitoring(t_philo *philo)
 		i++;
 	}
 	return(0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
 }

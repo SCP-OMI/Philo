@@ -1,7 +1,7 @@
 NAME = Philosophers
-CFLAGS = -Wall -Werror -Werror
+CFLAGS = -Wall -Werror -Werror 
 
-SRCS = philo.c philo_utils.c ft_atoi.c
+SRCS = philo.c philo_utils.c ft_atoi.c routine.c
 OBJS =	$(SRCS:.c=.o)
 RM =	rm -f
 
@@ -9,10 +9,10 @@ all:	$(NAME)
 
 
 %.o:	%.c
-		@$(CC) -c $<
+		@$(CC) $(CFLAGS) -c  $<
 
 $(NAME): $(OBJS)
-		@$(CC) $(OBJS) -o $(NAME)
+		@$(CC) -pthread -g -fsanitize=address $(OBJS) -o $(NAME)
 		@tput setaf 2; echo "object files generated"
 		@tput setaf 2; echo "philo compiled"
 

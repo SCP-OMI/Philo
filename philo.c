@@ -22,10 +22,10 @@ int main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		philo = malloc(sizeof(t_philo));
-		error_checks(ac, av, &ph_utils);
 		ph_utils = malloc(sizeof(t_ph_utils));
 		philo = malloc(sizeof(t_philo) * ph_utils->n_philo);
-		param_init(&philo, &ph_utils, ac, av);
+		error_checks(ac, av, ph_utils);
+		param_init(philo, ph_utils, ac, av);
 		thread_create(philo);
 		while(1)
 		{
