@@ -40,7 +40,7 @@ void	routine_thinking(t_philo *philo)
 void	prompt_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->utils->mutex_msg);
-	printf("%ld ms : philo %d died\n", get_time(philo->start), philo->philo_id);
+	printf("%lld ms : philo %d died\n", get_time(philo->start), philo->philo_id);
 }
 
 void *routine(void *arg)

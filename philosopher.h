@@ -37,18 +37,18 @@ typedef struct s_philo
 void		error_checks(int ac, char **av, t_ph_utils *utils);
 
 //Philo creation/inits
-void 	param_init(t_philo *philo,	t_ph_utils *utils, int ac, char **av);
-void 	init_parse(int ac, char **av, t_ph_utils *utils, t_philo *philo);
-int		thread_create(t_philo *philo);
+void 		param_init(t_philo *philo,	t_ph_utils *utils, int ac, char **av);
+void 		init_parse(int ac, char **av, t_ph_utils *utils, t_philo *philo);
+int			thread_create(t_philo *philo);
 
 //Helper fucntions
-long 	get_time(long start);
-int		exits();
-void 	sleeper(long usec);
-void	put_error(void);
-int		check_edges(long long result, int sign);
-int		ft_atoi(const char *str);
-void 	mini_print(t_philo *philo, char *str, long time);
+long long 	get_time(long start);
+int			exits();
+void 		sleeper(long usec);
+void		put_error(void);
+int			check_edges(long long result, int sign);
+int			ft_atoi(const char *str);
+void 		mini_print(t_philo *philo, char *str, long time);
 
 
 //Routine functions
