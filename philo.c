@@ -28,7 +28,7 @@ int main(int ac, char **av)
 		thread_create(philo);
 		while(1)
 		{
-			//philo->loop = 0;
+			utils->loop = 0;
 			if (monitoring(philo, utils))
 				return (0);
 		}

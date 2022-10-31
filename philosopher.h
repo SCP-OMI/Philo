@@ -9,6 +9,7 @@
 
 typedef struct s_ph_utils
 {
+	int				loop;
 	int				n_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -23,7 +24,6 @@ typedef struct s_ph_utils
 typedef struct s_philo
 {
 	int				philo_id;
-	int				loop;
 	int				start;
 	int 			last_eaten;
 	int				n_eaten;
@@ -59,7 +59,7 @@ void	routine_thinking(t_philo *philo);
 
 
 //Monitoring functions 
-void	prompt_death(t_philo *philo);
+int		prompt_death(t_philo *philo);
 int		monitoring(t_philo *philo, t_ph_utils *utils);
 
 #endif

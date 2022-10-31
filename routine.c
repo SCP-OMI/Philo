@@ -37,10 +37,11 @@ void	routine_thinking(t_philo *philo)
 	mini_print(philo, "is thinking\n", get_time(philo->start));
 }
 
-void	prompt_death(t_philo *philo)
+int	prompt_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->utils->mutex_msg);
 	printf("%lld ms : philo %d died\n", get_time(philo->start), philo->philo_id);
+	exit(1);
 }
 
 void *routine(void *arg)

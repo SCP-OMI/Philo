@@ -104,7 +104,7 @@ long long	get_time(long start)
 	long long tim;
 
 	gettimeofday(&time, NULL);
-	tim = (time.tv_sec ) + (time.tv_usec);
+	tim = (time.tv_sec / 1000 ) + (time.tv_usec * 1000);
 	return (tim);
 }
 
@@ -128,15 +128,12 @@ int monitoring(t_philo *philo, t_ph_utils *utils)
 		pthread_mutex_lock(&philo->utils->time);
 		time = get_time(philo[i].start + philo[i].last_eaten);
 		if (philo[i].n_eaten >= utils->meals && philo[i].utils->meals != -1)
-			philo->loop++;
+			utils->loop++;
 		pthread_mutex_unlock(&philo->utils->time);
-		if (philo->loop == utils->n_philo && philo[i].utils->meals != -1)
+		if (utils->loop == utils->n_philo && philo[i].utils->meals != -1)
 			return (1);
 		if (time >= philo[i].utils->time_to_die)
-		{
 			prompt_death(&philo[i]);
-			return(1);
-		}
 		i++;
 	}
 	return(0);
