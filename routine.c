@@ -3,7 +3,7 @@
 void mini_print(t_philo *philo, char *str, long time)
 {
 	pthread_mutex_lock(&philo->utils->mutex_msg);
-	printf("%04ld ms : Philo %d %s", time, philo->philo_id, str);
+	printf("%ld ms : Philo %d %s", time, philo->philo_id, str);
 	pthread_mutex_unlock(&philo->utils->mutex_msg);
 }
 
@@ -18,6 +18,7 @@ void	routine_eating(t_philo *philo)
 	pthread_mutex_lock(&philo->utils->time);
 	philo->n_eaten++;
 	philo->last_eaten = get_time(philo->start);
+		//printf("this is your last_eaten : %i\n", philo->last_eaten);
 	pthread_mutex_unlock(&philo->utils->time);
 	sleeper(philo->utils->time_to_eat);
 	pthread_mutex_unlock(&philo->utils->mutex[philo->left_fork]);
@@ -39,7 +40,7 @@ void	routine_thinking(t_philo *philo)
 void	prompt_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->utils->mutex_msg);
-	printf("%ld : philo %d died\n", get_time(philo->start), philo->philo_id);
+	printf("%ld ms : philo %d died\n", get_time(philo->start), philo->philo_id);
 }
 
 void *routine(void *arg)

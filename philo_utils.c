@@ -69,7 +69,7 @@ void param_init(t_philo *philo,	t_ph_utils *utils, int ac, char **av)
 	while (i < utils->n_philo)
 	{
 		philo[i].philo_id = i + 1;
-		philo[i].loop = 0;
+		philo[i].n_eaten = 0;
 		philo[i].left_fork = i;
 		philo[i].right_fork = i + 1;
 		philo[i].last_eaten = 0;
@@ -89,18 +89,19 @@ void init_parse(int ac, char **av, t_ph_utils *utils, t_philo *philo)
 	utils->time_to_eat = atoi(av[3]);
 	utils->time_to_sleep = atoi(av[4]);
 	if (ac == 6)
-		philo->loop = atoi(av[5]);
+		utils->meals = atoi(av[5]);
 	else
-		philo->loop = -1;
+		utils->meals = -1;
 	philo->start = get_time(0);
 	pthread_mutex_init(&utils->mutex_msg, NULL);
 	utils->mutex = malloc(sizeof(pthread_mutex_t) * utils->n_philo);	
 }
 
 
-long get_time(long start)
+long	get_time(long start)
 {
-	struct timeval time;
+	struct timeval	time;
+
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000) - start);
 }
@@ -110,11 +111,11 @@ void sleeper(long usec)
 	long time;
 
 	time = get_time(0);
-	while(get_time(time) * 1000 < usec)
+	while (get_time(time) * 1000 < usec)
 		usleep(100);
 }
 
-int monitoring(t_philo *philo)
+int monitoring(t_philo *philo, t_ph_utils *utils)
 {
 	int i;
 	long time;
@@ -124,8 +125,10 @@ int monitoring(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->utils->time);
 		time = get_time(philo[i].start + philo[i].last_eaten);
-
-		if (philo[i].n_eaten >= philo[i].meals && philo)
+		if (philo[i].n_eaten >= utils->meals && philo[i].utils->meals != -1)
+			philo->loop++;
+		pthread_mutex_unlock(&philo->utils->time);
+		if (philo->loop == utils->n_philo && philo[i].utils->meals)
 			return (1);
 		if (time >= philo[i].utils->time_to_die)
 		{

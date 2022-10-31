@@ -16,19 +16,20 @@ int main(int ac, char **av)
 {
 
 	t_philo *philo;
-	t_ph_utils *ph_utils;
+	t_ph_utils *utils;
 
 
 	if (ac == 5 || ac == 6)
 	{
-		ph_utils = malloc(sizeof(t_ph_utils));
+		utils = malloc(sizeof(t_ph_utils));
 		philo = malloc(sizeof(t_philo) * ft_atoi(av[1]));
-		param_init(philo, ph_utils, ac, av);
-		error_checks(ac, av, ph_utils);
+		param_init(philo, utils, ac, av);
+		error_checks(ac, av, utils);
 		thread_create(philo);
 		while(1)
 		{
-			if (routine(philo))
+			//philo->loop = 0;
+			if (monitoring(philo, utils))
 				return (0);
 		}
 	}

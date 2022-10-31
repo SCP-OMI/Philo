@@ -13,6 +13,7 @@ typedef struct s_ph_utils
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				meals;
 	pthread_mutex_t mutex_msg;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t time;
@@ -24,7 +25,6 @@ typedef struct s_philo
 	int				philo_id;
 	int				loop;
 	int				start;
-	int				meals;
 	int 			last_eaten;
 	int				n_eaten;
 	int				left_fork;
@@ -60,6 +60,6 @@ void	routine_thinking(t_philo *philo);
 
 //Monitoring functions 
 void	prompt_death(t_philo *philo);
-int		monitoring(t_philo *philo);
+int		monitoring(t_philo *philo, t_ph_utils *utils);
 
 #endif
