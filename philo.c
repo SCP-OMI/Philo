@@ -14,26 +14,23 @@
 
 int main(int ac, char **av)
 {
-
 	t_philo *philo;
 	t_ph_utils *utils;
-
 
 	if (ac == 5 || ac == 6)
 	{
 		utils = malloc(sizeof(t_ph_utils));
-		philo = malloc(sizeof(t_philo) * ft_atoi(av[1]));
-		param_init(philo, utils, ac, av);
-		error_checks(ac, av, utils);
+		if(param_init(&philo, utils, ac, av) == 255)
+			return(printf("Invalid arg type/range\n"));
 		thread_create(philo);
 		while(1)
 		{
-			utils->loop = 0;
-			if (monitoring(philo, utils))
+			if (monitoring(philo, utils) == EXIT)
 				return (0);
+			usleep(50);
 		}
 	}
-	return(printf("Invalid number of args"));
+	return(printf("Invalid number of args\n"));
 }
 
 

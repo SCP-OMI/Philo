@@ -1,4 +1,4 @@
-NAME = Philosophers
+NAME = philo
 CFLAGS = -Wall -Werror -Werror 
 
 SRCS = philo.c philo_utils.c ft_atoi.c routine.c

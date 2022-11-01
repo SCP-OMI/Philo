@@ -12,29 +12,29 @@
 
 #include"philosopher.h"
 
-void	put_error(void)
+int	put_error(int *err)
 {
-	write(2, "You have an outside range parameter\n", 36);
-	exit (1);
+	//if (*err == 0)
+		//write(2, "You have an outside range parameter\n", 36);
+	*err = 1;
+	return(255);
 }
 
-int	check_edges(long long result, int sign)
+int	check_edges(long long result, int sign, int *err)
 {
 	if (result > 2147483647 && sign == 1)
-		put_error();
-	if (result > 2147483648 && sign == -1)
-		put_error();
+		return(put_error(err));
+	else if (result == 0)
+		return(put_error(err));
 	return (result *= sign);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *err)
 {
-	int			sign;
 	long long	result;
 	int			i;
 
 	result = 0;
-	sign = 1;
 	i = 0;
 	while (str[i] && (str[i] == '\f' || str[i] == '\t' || str[i] == ' '
 			|| str[i] == '\n' || str[i] == '\r' || str[i] == '\v'))
@@ -42,15 +42,15 @@ int	ft_atoi(const char *str)
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i++] == '-')
-			sign = -1;
+			return(put_error(err));
 	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			put_error();
+			return(put_error(err));
 		result = (result * 10) + str[i++] - '0';
 		if (result > 2147483647)
-			put_error();
+			return(put_error(err));
 	}
-	return (check_edges(result, sign));
+	return (check_edges(result, 1, err));
 }
