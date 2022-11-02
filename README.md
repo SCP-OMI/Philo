@@ -1,3 +1,13 @@
+# Philoshophers : Usually Philosophers think for a living... These ones however... Not really.
+
+## What is the goal of this project?
+   
+   > This project's sole perpose is to understand the meaning of Threads and how they function.
+
+Thread
+	: A thread is simply the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is a part of the OS.
+
+
 
 routine :
 	Eating :
