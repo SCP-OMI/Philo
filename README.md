@@ -4,6 +4,10 @@
    
    > This project's sole perpose is to understand the meaning of Threads and how they function.
 
+## How ?
+
+	> In order to understand the functionalities of threads, we will try to replicate the famous [dining philosopher's problem](https://www.geeksforgeeks.org/dining-philosopher-problem-using-semaphores/).
+
 Thread
 	: A thread is simply the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is a part of the OS.
 
