@@ -14,18 +14,16 @@
 
 int	put_error(int *err)
 {
-	//if (*err == 0)
-		//write(2, "You have an outside range parameter\n", 36);
 	*err = 1;
-	return(255);
+	return (255);
 }
 
 int	check_edges(long long result, int sign, int *err)
 {
 	if (result > 2147483647 && sign == 1)
-		return(put_error(err));
+		return (put_error(err));
 	else if (result == 0)
-		return(put_error(err));
+		return (put_error(err));
 	return (result *= sign);
 }
 
@@ -42,15 +40,15 @@ int	ft_atoi(const char *str, int *err)
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i++] == '-')
-			return(put_error(err));
+			return (put_error(err));
 	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return(put_error(err));
+			return (put_error(err));
 		result = (result * 10) + str[i++] - '0';
 		if (result > 2147483647)
-			return(put_error(err));
+			return (put_error(err));
 	}
 	return (check_edges(result, 1, err));
 }
