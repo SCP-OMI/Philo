@@ -49,7 +49,6 @@ int	prompt_death(t_philo *philo)
 	pthread_mutex_lock(&philo->utils->mutex_msg);
 	printf("%04lld ms : philo %d died\n", \
 		get_time(philo->start), philo->philo_id);
-	pthread_mutex_unlock(&philo->utils->mutex_msg);
 	return (EXIT);
 }
 
