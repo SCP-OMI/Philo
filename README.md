@@ -22,7 +22,7 @@
  --> Now, technically you can complete this task with ease, one of you will take the two screws, unscrew the first bolt and land them to the other.  
  --> But imagine if both of you took one screw driver, now suddently we are in a bad position; since neither of you have enough ressources to complete a task, even though technically you have enough to complete said task.  
  --> That's deadlock for you, in other technical (lame) words :  
- Is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process.
+ Is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process, leading to no process having enough ressource access to perform a task, halting the whole program; thus *DEADLOCK* 
 
 **Data race : (Race Conditions)**  
 --> Let's say we have an integer that needs to be incremented to a certain number, we set two threads, each increment that said number by one, something like this :
@@ -41,6 +41,7 @@ int number = 0;
 			return(1);
 		if (pthread_create(&th2, NULL, &routine, NULL) != 0)
 			return(1);
+		printf("%d", number);
 	}
 ```
 
@@ -49,14 +50,14 @@ Now, technically once we print the number at the end we should end up with somet
 >Expected result : 2,000,000  
 >Actual result : a number != 2,000,000
 
-You can go and try this yourself, in small numbers you might get the correct result, but the high the number; the more off the result tend up to be, but why is that the case?  
+You can go and try this yourself, in small numbers you might get the correct result since threads are fast and they can finish basic tasks almost instantaneously, but the high the number; the more off the result tend up to be since the interlacing between thread occurs, but why is that the case? 
 
 To explain this, We need to explain how incrementing actually occurs.  
 When you want to increment a number, your 1st thread reads the original value, then the value of said number gets incremented locally in the CPU, and then returns the new value.
 
 Now in the 2nd reads the new value, increments it and then returns the newset value, something like this :  
 
-| Threads/ Actions        | thread 1      | thread 2  |
+| Threads / Actions       | thread 1      | thread 2  |
 | ------------------------|:-------------:| ---------:|
 | Reading the number      | 1 			  | 2   	  |
 | Incrementing the number | 1 			  | 2   	  |
@@ -75,13 +76,49 @@ However, if the threads happen to start their routine at the same moment in time
 Taking everything I said into consideration, when we create those two threads, both threads read the value, but the CPU might silence one thread and let the second continue its work for numerous cycles (reading, incrementing, returning).  
 But once the CPU starts the other thread one more time, the thread will increment the value it has read before being silenced; which is the outdated value, then overwrite the actual value with the old one, creating a conflict of values...  
 
-| Threads/ Actions        | thread 1      | thread 2  |
+| Threads / Actions       | thread 1      | thread 2  |
 | ------------------------|:-------------:| ---------:|
 | Reading the number      | 8 			  | 2   	  |
 | Incrementing the number | 8 			  | 2   	  |
 | Writing the number      | *9* 		  | *3*   	  |
 
 This conflict of values is what we call (race condition).
+
+**Mutex :**
+
+Now, how can we fix this race condition?
+Well, we can create a flag that tells the thread either to start its functionality or not something similar to this :  
+
+```c
+int number = 0;
+int lock = 0;
+	void *routine()
+	{
+		for(number = )		{
+			if(lock == 1)
+		
+			i++;
+		}
+	}
+	int main(int ac, char **av)
+	{
+		pthread_t th1, th2;
+		if (pthread_create(&th1, NULL, &routine, NULL) != 0)
+			return(1);
+		if (pthread_create(&th2, NULL, &routine, NULL) != 0)
+			return(1);
+		printf("%d", number);
+	}
+
+```
+
+
+
+
+
+
+
+If you have any question about this sector or have found any misconception, please don't hesitate to contact [me](https://twitter.com/mehdicharouh1), I'll be more than happy to explain/fix upon my "article". 
 
 
 
