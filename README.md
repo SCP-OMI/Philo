@@ -90,12 +90,12 @@ Now, how can we fix this race condition?
 Well, we can create a flag that tells the thread either to start its functionality or not something similar to this :  
 
 ```c
-int number = 0;
-int lock = 0;
+pthread_mutex_t lock;
 	void *routine()
 	{
-		for(number = )		{
+		for(int number = 0; number < 1000000) {
 			if(lock == 1)
+				//wait till lock == 0
 		
 			i++;
 		}
@@ -103,11 +103,14 @@ int lock = 0;
 	int main(int ac, char **av)
 	{
 		pthread_t th1, th2;
+		pthread_mutex_init(&lock, NULL);
 		if (pthread_create(&th1, NULL, &routine, NULL) != 0)
 			return(1);
 		if (pthread_create(&th2, NULL, &routine, NULL) != 0)
 			return(1);
+		pthread_mutex_destroy(&lock, NULL)
 		printf("%d", number);
+
 	}
 
 ```
