@@ -123,13 +123,13 @@ Now what **pthread_mutex_lock** does is tell the thread to not start reading unt
 For this part, you can just go use your man to find what each function does, buuuut since I have this deal with myself to make this repo the all and be all for this project...  
 
 1. pthread functions (POSIX thread)
-    - pthread_create
-    - pthread_detach
-	- pthread_join
-	- pthread_mutex_init
-	- pthread_mutex_lock
-	- pthread_mutex_unlock
-	- pthread_mutex_destroy  
+    - [pthread_create](#pthread_create)
+    - [pthread_detach](#pthread_detach)
+	- [pthread_join](#pthread_join)
+	- [pthread_mutex_init](#pthread_mutex_init)
+	- [pthread_mutex_lock](#pthread_mutex_lock)
+	- [pthread_mutex_unlock](#pthread_mutex_unlock)
+	- [pthread_mutex_destroy](#pthread_mutex_destroy)  
 ---
 
 pthread_create 
@@ -143,7 +143,7 @@ pthread_create
 
 >On success, pthread_create() returns 0, on error it returns an error number and the contents of *thread are undefined.
 ---
-pthread_destroy
+pthread_detach
 ---
 ```c
        int pthread_detach(pthread_t thread);
