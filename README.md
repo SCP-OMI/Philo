@@ -144,7 +144,7 @@ pthread_create
 >On success, pthread_create() returns 0, on error it returns an error number and the contents of *thread are undefined.
 ---
 pthread_destroy
-
+---
 ```c
        int pthread_detach(pthread_t thread);
 ```
@@ -183,12 +183,36 @@ int pthread_mutex_destroy(pthread_mutex_t *mutex);
 ```
 > *pthread_mutex_destroy* function destroys the mutex referenced by mutex; rendering them "uninitialized", in other terms, it turns the object set to by mutex to an invalid value.
 >> It is best to destroy an unlocked mutex, the destroying of an already locked mutex will cause undifined behaviors
+---
+pthread_mutex_lock
+---
+```c
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+```
+
+> *pthread_mutex_lock* function locks the object referenced by *mutex*, if the mutex is already locked, the calling thread blocks until the mutex becomes available. this operation returns with the mutex object referenced to by the mutex in a locked state (visit the race condition section for more information)
+>> There is another similar function *pthread_mutex_trylock* which before locking the object; it checkes if said object was already locked; if true it immediatly returns; else it proceeds to lock the object.  
+
+>On success, the *pthread_mutex_lock* returns zero, otherwise an error number.
+---
+pthread_mutex_unlock
+---
+```c
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+```
+> *pthread_mutex_unlock* function unlock the object referenced by *mutex* based on the attributes passed to the thread.
+>> if there are threads blocked on the mutex object referenced by mutex when pthread_mutex_unlock() is called, resulting in the mutex becoming available, the scheduling policy is used to determine which thread shall acquire the mute.  
+> On success, *pthread_mutex_unlock* returns 0, otherwise it returns an error number. (check the error codes [here](https://pubs.opengroup.org/onlinepubs/007908799/xsh/pthread_mutex_unlock.html)).  
+
+And just like that , we have finished with the introductory part, no onto the actual logic behind the project.
+
+
+
 
 
 
 > Note to self   
 	Dude I know you are tired and can't be arsed to do anything but please *for the love of god, finish something in your damn life!!!!*
-
 
 
 
