@@ -128,7 +128,8 @@ For this part, you can just go use your man to find what each function does, buu
 	- pthread_join
 	- pthread_mutex_init
 	- pthread_mutex_lock
-	- pthread_mutex_unlock  
+	- pthread_mutex_unlock
+	- pthread_mutex_destroy  
 ---
 
 pthread_create 
@@ -138,7 +139,7 @@ pthread_create
 ```
 
 > *pthread create* function starts a new thread in the calling process. The new thread starts executing by invoking a **routine function** while passing **arg** as a parameter for the routine function. For the **attributes** argument I'd like to refer you to the [POSIX attributes man page](https://man7.org/linux/man-pages/man7/attributes.7.html), but in short; it's the safety of calling said function in a certain context.  
->> For the sake of this project, no attribute will be needed; but for the sake of better understanding the whole porspect; I really encourage you to give that man page a good read.  
+>> For the sake of this project, no attribute will be needed; but for better understanding the whole porspect; I **really encourage you to give that man page a good read.** 
 
 >On success, pthread_create() returns 0, on error it returns an error number and the contents of *thread are undefined.
 ---
@@ -147,18 +148,46 @@ pthread_destroy
 ```c
        int pthread_detach(pthread_t thread);
 ```
+
+> *pthread_detach* function is basically self explanatory, it takes a thread and marks it as detached, meaning that all the ressources used by that thread has been released.  
+>> attempting to detach an already detached thread results in an unspecified behavior.  
+
+>On success, pthread_detach() returns 0, on error it returns an error number
+
+---
+pthread_join
+---
+```c
+	int pthread_join(pthread_t thread, void **retval);
+```
+
+> *pthread_join* function waits for the thread specified to terminate. if that thread has already been terminated then **pthread_join** returns immediately, and the thread specified by thread must be joinable.
+>> If *retval* is not *NULL*, the **pthread_join()** copies the exit status of the target thread into the location pointed to by *retval*
+
+> On success, pthread_join() returns 0, on error it returns an error number.  
 ---
 
-	
-
-
-
-
+pthread_mutex_init
+---
+```c
+int pthread_mutex_init(pthread_mutex_t *mutex, 
+    const pthread_mutexattr_t *attr);
+```
+> *pthread_mutex_init* function initializes the mutex referenced by mutex with attributes specified by attr (see the remark earlier about the attributes)
+>>Upon successful initialization, the state of the mutex becomes initialised and unlocked.
+---
+pthread_mutex_destroy
+---
+```c
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+```
+> *pthread_mutex_destroy* function destroys the mutex referenced by mutex; rendering them "uninitialized", in other terms, it turns the object set to by mutex to an invalid value.
+>> It is best to destroy an unlocked mutex, the destroying of an already locked mutex will cause undifined behaviors
 
 
 
 > Note to self   
-	Dude I know you are tired and can't be arsed to do anything but    please *for the love of god, finish something in your damn life!!!!*
+	Dude I know you are tired and can't be arsed to do anything but please *for the love of god, finish something in your damn life!!!!*
 
 
 
