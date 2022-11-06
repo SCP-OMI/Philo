@@ -11,7 +11,7 @@
 
 
 ## In case you didn't want to open another tab and look for an already laid out information, I'll give you a watered down version.
-###	But, before we do so, we need to clarify some ==key concepts==
+###	But, before we do so, we need to clarify some **key concepts**
 ---
 **Thread :**    
  it's simply the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is a part of the OS.
