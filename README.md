@@ -87,16 +87,16 @@ This conflict of values is what we call (race condition).
 **Mutex :**
 
 Now, how can we fix this race condition?
-Well, we can create a flag that tells the thread either to start its functionality or not something similar to this :  
+Well, we can create a flag that tells the thread either to start its functionality or in add a "lock" to the actual variable we are using, and in order to do so; we will be introducing a new "function" called *pthread_mutex*  not something similar to this :  
 
 ```c
 pthread_mutex_t lock;
 	void *routine()
 	{
 		for(int number = 0; number < 1000000) {
-			pthread_mutex_lock(&mutex);
+			pthread_mutex_lock(&lock);
 			i++;
-			pthread_mutex_unlock(&mutex)
+			pthread_mutex_unlock(&lock)
 		}
 	}
 	int main(int ac, char **av)
@@ -113,6 +113,18 @@ pthread_mutex_t lock;
 	}
 
 ```
+Now what *pthread_mutex_lock* does is tell the thread to not start reading until the other thread has finished it's job, thus getting away from any *race condition*.
+
+> It's worth to mention that the mutexes will reduce the time of execution; therefore it is optimal to not use them all around...  
+*Remember, your program should be perfect; and slow ain't perfect*  
+
+### What are the functions am i going to use while tackling this project?
+
+the 
+
+
+
+
 
 
 > Note to self   
