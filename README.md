@@ -94,10 +94,9 @@ pthread_mutex_t lock;
 	void *routine()
 	{
 		for(int number = 0; number < 1000000) {
-			if(lock == 1)
-				//wait till lock == 0
-		
+			pthread_mutex_lock(&mutex);
 			i++;
+			pthread_mutex_unlock(&mutex)
 		}
 	}
 	int main(int ac, char **av)
@@ -116,7 +115,8 @@ pthread_mutex_t lock;
 ```
 
 
-
+> Note to self   
+	Dude I know you are tired and can't be arsed to do anything but    please *for the love of god, finish something in your damn life!!!!*
 
 
 
