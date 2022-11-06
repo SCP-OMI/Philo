@@ -113,14 +113,44 @@ pthread_mutex_t lock;
 	}
 
 ```
-Now what *pthread_mutex_lock* does is tell the thread to not start reading until the other thread has finished it's job, thus getting away from any *race condition*.
+Now what **pthread_mutex_lock** does is tell the thread to not start reading until the other thread has finished it's job, thus getting away from any **race condition**.
 
 > It's worth to mention that the mutexes will reduce the time of execution; therefore it is optimal to not use them all around...  
-*Remember, your program should be perfect; and slow ain't perfect*  
+**Remember, your program should be perfect; and slow ain't perfect** 
 
 ### What are the functions am i going to use while tackling this project?
 
-the 
+For this part, you can just go use your man to find what each function does, buuuut since I have this deal with myself to make this repo the all and be all for this project...  
+
+1. pthread functions (POSIX thread)
+    - pthread_create
+    - pthread_detach
+	- pthread_join
+	- pthread_mutex_init
+	- pthread_mutex_lock
+	- pthread_mutex_unlock  
+---
+
+pthread_create 
+---
+``` c
+	int pthread_create(pthread_t *restrict thread, const pthread_attr_t *restrict attr, void *(*start_routine)(void *), void *restrict arg);
+```
+
+> *pthread create* function starts a new thread in the calling process. The new thread starts executing by invoking a **routine function** while passing **arg** as a parameter for the routine function. For the **attributes** argument I'd like to refer you to the [POSIX attributes man page](https://man7.org/linux/man-pages/man7/attributes.7.html), but in short; it's the safety of calling said function in a certain context.  
+>> For the sake of this project, no attribute will be needed; but for the sake of better understanding the whole porspect; I really encourage you to give that man page a good read.  
+
+>On success, pthread_create() returns 0, on error it returns an error number and the contents of *thread are undefined.
+---
+pthread_destroy
+
+```c
+       int pthread_detach(pthread_t thread);
+```
+---
+
+	
+
 
 
 
