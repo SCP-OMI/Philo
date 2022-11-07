@@ -217,21 +217,21 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 >> if there are threads blocked on the mutex object referenced by mutex when pthread_mutex_unlock() is called, resulting in the mutex becoming available, the scheduling policy is used to determine which thread shall acquire the mute.  
 > On success, *pthread_mutex_unlock* returns 0, otherwise it returns an error number. (check the error codes [here](https://pubs.opengroup.org/onlinepubs/007908799/xsh/pthread_mutex_unlock.html)).  
 
-And just like that , we have finished with the introductory part.  
-Now onto the actual logic behind the project...  
->Disclaimer : This next part is an explanation of the logic i went with while tackling this project; and by no means does it mean to take this logic and work with it  
+
+### That's the end of this mini README; I hope you got enough info for you to work and I encourage you to find your own logic to tackle this problem.  
+
+>If you have any question about this sector or have found any misconception, please don't hesitate to contact [me](https://twitter.com/mehdicharouh1), I'll be more than happy to explain/fix upon my "article". 
 
 
 
 
 
 
-> Note to self   
-	Dude I know you are tired and can't be arsed to do anything but please *for the love of god, finish something in your damn life!!!!*
+<!-- > Note to self   
+	Dude I know you are tired and can't be arsed to do anything but please *for the love of god, finish something in your damn life!!!!* -->
 
 
 
-If you have any question about this sector or have found any misconception, please don't hesitate to contact [me](https://twitter.com/mehdicharouh1), I'll be more than happy to explain/fix upon my "article". 
 
 
 
