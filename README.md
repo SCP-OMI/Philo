@@ -13,19 +13,32 @@
 ## In case you didn't want to open another tab and look for an already laid out information, I'll give you a watered down version.
 ###	But, before we do so, we need to clarify some **key concepts**
 ---
-**Thread :**    
+**POSIX :**
+---
+While working on this project, you will interact with alot of functions that start with the letter "P" (**p**thread_suffix), that little *p* is short for *POSIX*.  
+Now you might be asking yourself, what is POSIX?  
+Well in short, POSIX stands for "Portable Operating System interface" which is a set of standards made by IEEE (Institute of Electrical and Electronical Engeneers) to maintain compatibility between Operating Systems.   
+
+**Thread :**
+---
  it's simply the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is a part of the OS.
  > Note1 : Threads are fast, like real fast (this will come handy later).  
 
 **Deadlock :**  
- --> Imagine you are two people trying to unscrew two bolts, in order to do that you both need to have two screw drivers (for some reason) with a small caviat, you two can't really communicate.  
- --> Now, technically you can complete this task with ease, one of you will take the two screws, unscrew the first bolt and land them to the other.  
- --> But imagine if both of you took one screw driver, now suddently we are in a bad position; since neither of you have enough ressources to complete a task, even though technically you have enough to complete said task.  
- --> That's deadlock for you, in other technical (lame) words :  
+---
+Imagine you are two people trying to unscrew two bolts, in order to do that you both need to have two screw drivers (for some reason) with a small caviat, you two can't really communicate.  
+
+Now, technically you can complete this task with ease, one of you will take the two screws, unscrew the first bolt and land them to the other.  
+
+But imagine if both of you took one screw driver, now suddently we are in a bad position; since neither of you have enough ressources to complete a task, even though technically you have enough to complete said task.  
+
+That's deadlock for you, in other technical (lame) words :  
+
  Is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process, leading to no process having enough ressource access to perform a task, halting the whole program; thus *DEADLOCK* 
 
 **Data race : (Race Conditions)**  
---> Let's say we have an integer that needs to be incremented to a certain number, we set two threads, each increment that said number by one, something like this :
+---
+Let's say we have an integer that needs to be incremented to a certain number, we set two threads, each increment that said number by one, something like this :
 
 ```c
 int number = 0;
@@ -47,7 +60,7 @@ int number = 0;
 
 Now, technically once we print the number at the end we should end up with something like :  
 
->Expected result : 2,000,000  
+>Expected result : 2,000,000 
 >Actual result : a number != 2,000,000
 
 You can go and try this yourself, in small numbers you might get the correct result since threads are fast and they can finish basic tasks almost instantaneously, but the high the number; the more off the result tend up to be since the interlacing between thread occurs, but why is that the case? 
@@ -204,7 +217,9 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 >> if there are threads blocked on the mutex object referenced by mutex when pthread_mutex_unlock() is called, resulting in the mutex becoming available, the scheduling policy is used to determine which thread shall acquire the mute.  
 > On success, *pthread_mutex_unlock* returns 0, otherwise it returns an error number. (check the error codes [here](https://pubs.opengroup.org/onlinepubs/007908799/xsh/pthread_mutex_unlock.html)).  
 
-And just like that , we have finished with the introductory part, no onto the actual logic behind the project.
+And just like that , we have finished with the introductory part.  
+Now onto the actual logic behind the project...  
+>Disclaimer : This next part is an explanation of the logic i went with while tackling this project; and by no means does it mean to take this logic and work with it  
 
 
 
