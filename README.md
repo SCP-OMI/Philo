@@ -95,10 +95,10 @@ But once the CPU starts the other thread one more time, the thread will incremen
 | Incrementing the number | 8 			  | 2   	  |
 | Writing the number      | *9* 		  | *3*   	  |
 
-This conflict of values is what we call (race condition).
+> This conflict of values is what we call (race condition).
 
 **Mutex :**
-
+---
 Now, how can we fix this race condition?
 Well, we can create a flag that tells the thread either to start its functionality or in add a "lock" to the actual variable we are using, and in order to do so; we will be introducing a new "function" called *pthread_mutex*  not something similar to this :  
 
