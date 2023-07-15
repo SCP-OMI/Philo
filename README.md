@@ -1,4 +1,4 @@
-# Philoshophers : Usually Philosophers think for a living... These ones however... Not really.
+# Philoshophers: Usually Philosophers think for a living... These ones, however... Not really.
 
 ## What is the goal of this project?
 ---
@@ -10,7 +10,7 @@
 > In order to understand the functionalities of threads, we will try to replicate the famous [dinning philosopher's problem]([This](https://www.geeksforgeeks.org/dining-philosopher-problem-using-semaphores/))
 
 
-## In case you didn't want to open another tab and look for an already laid out information, I'll give you a watered down version.
+## In case you didn't want to open another tab and look for already laid out information, I'll give you a watered-down version.
 ###	But, before we do so, we need to clarify some **key concepts**
 ---
 **POSIX :**
